@@ -30,7 +30,10 @@ class Captcha
     public function check($fieldName, $value)
     {
         $stored = \Session::get($this->getSessionVar($fieldName));
-        $value  = $this->driver->check($stored, $value);
+        if (empty($stored)) {
+            return false;
+        }
+        $value = $this->driver->check($stored, $value);
         // Reset the captcha
         $this->init($fieldName);
         return $value;
