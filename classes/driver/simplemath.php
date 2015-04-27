@@ -25,6 +25,9 @@ class Driver_SimpleMath
 
     public function display($params = array())
     {
+        if (\Input::post($this->name)) {
+
+        }
         return \View::forge('novius_captcha::front/Driver/SimpleMath', array(
             'one'    => $this->one,
             'two'    => $this->two,
