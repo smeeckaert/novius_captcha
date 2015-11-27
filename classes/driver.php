@@ -10,4 +10,5 @@ interface Driver
     public function check($storedValue, $submittedValue);
 
     public function display($params);
+
 }
