@@ -6,9 +6,11 @@ class Captcha
 {
     /** @var  Driver */
     private $driver;
+    protected $session;
 
     private function __construct($driverClass)
     {
+        $this->session = Session::forge();
         $this->driver = new $driverClass();
     }
 
@@ -24,12 +26,12 @@ class Captcha
 
     private function storeAnswer($field, $value)
     {
-        \Session::set($this->getSessionVar($field), $value);
+        $this->session->set($this->getSessionVar($field), $value);
     }
 
     public function check($fieldName, $value)
     {
-        $stored = \Session::get($this->getSessionVar($fieldName));
+        $stored = $this->session->get($this->getSessionVar($fieldName));
         if (empty($stored)) {
             return false;
         }
